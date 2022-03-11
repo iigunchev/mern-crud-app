@@ -1,8 +1,4 @@
 import React from 'react'
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import DeleteIcon from '@mui/icons-material/Delete';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { deletePost, likePost } from "../../../actions/posts";
@@ -12,29 +8,27 @@ export const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
 
   return (
-    <Card className="card">
-      <CardMedia  className="media" image={post.selectedFile} title={post.title}/>
-      <div className="overlay">
-        <Typography variant="h6">{post.creator}</Typography>
-        <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+    <article className="card md:min-w-full min-h-full shadow-sm overflow-hidden bg-slate-200">
+      <img className="brightness-50 object-cover max-h-60" src={post.selectedFile} alt={post.title}/>
+      <div className="absolute top-4 left-4 text-white">
+        <h6>{post.creator}</h6>
+        <p>{moment(post.createdAt).fromNow()}</p>
       </div>
-      <div className="overlay2">
-        <Button style={{ color: "white" }} size="small" onClick={()=>setCurrentId(post._id)}>
-          <MoreHorizIcon fontSize="default" />
-        </Button>
+      <div className="absolute top-4 right-4 text-white">
+        <button onClick={()=>setCurrentId(post._id)}>
+          ...
+        </button>
       </div>
-      <div className="details">
-        <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+      <div className="bg-blue-50 text-blue-600 text-sm font-bold mx-4 px-4 py-2 max-w-fit rounded-lg mt-4">
+        <h6>{post.tags.map((tag) => `${tag} `)}</h6>
       </div>
-      <Typography className="title" gutterBottom variant="h5" component="h2">{post.title}</Typography>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
-      </CardContent>
-      <CardActions className="cardActions">
-        <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}><ThumbUpAltIcon fontSize="small" /> &nbsp; Like &nbsp; {post.likeCount} </Button>
-        <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> Delete</Button>
-      </CardActions>
-    </Card>
+      <h5 className="my-2 mx-4 text-2xl font-extrabold text-slate-700">{post.title}</h5>
+      <p className="mx-4 my-2 text-slate-700">{post.message}</p>
+      <div className="my-2 mx-4 flex justify-between">
+        <button className="font-bold bg-slate-200 max-w-fit min-h-max p-2 rounded-lg" onClick={() => dispatch(likePost(post._id))}>Like &nbsp; {post.likeCount}</button>
+        <button className="font-medium rounded-lg p-2 bg-slate-600 text-white" onClick={() => dispatch(deletePost(post._id))}>Delete</button>
+      </div>
+    </article>
   )
 }
 
