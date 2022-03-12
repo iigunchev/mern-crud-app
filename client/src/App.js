@@ -1,35 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Container, AppBar, Typography, Grid } from "@mui/material";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { BrowserRouter as Browser, Routes, Route} from 'react-router-dom';
+import { Container } from "@mui/material";
 
-import { getPosts } from "./actions/posts";
 import Header from "./components/Header";
-import Form from "./components/Form/Form";
-import Posts from "./components/Posts/Posts";
+import Home from "./components/Home";
 import "./styles.scss";
+import Auth from './components/Auth';
 
 // import memories from "./images/memories.png";
 
 const App = () => {
-  const [currentId, setCurrentId] = useState(null);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch])
   
 
   return (
-    <Container maxwidth="lg">
-      <Header />
-      <main className="gap-4 pt-4 flex flex-col items-center">
-        <Form
-        currentId={currentId} 
-        setCurrentId={setCurrentId}/>
-        <Posts
-        setCurrentId={setCurrentId}/>
-      </main>
-    </Container>
+    <Browser>
+      <Routes>
+        <Container maxwidth="lg">
+          <Header />
+          <Route path="/" exact element={<Home />} />
+          <Route path="/auth" exact element={<Auth />} />
+        </Container>
+      </Routes>
+    </Browser>
   )
 }
 
