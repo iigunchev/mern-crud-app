@@ -50,7 +50,6 @@ export const Form = ({ currentId, setCurrentId }) => {
     <form className="container shadow-sm bg-slate-200 p-6 my-8 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4 place-content-start" onSubmit={handleSubmit}>
         <h6 className="sm:col-span-2">{ currentId ? "Editing" : "Creating" } a Memory</h6>
         <label className="block">
-        
           <input type="text" 
             name="creator" 
             label="Creator" 
