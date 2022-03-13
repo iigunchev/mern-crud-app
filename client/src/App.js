@@ -14,13 +14,13 @@ const App = () => {
 
   return (
     <Browser>
-      <Routes>
-        <Container maxwidth="lg">
-          <Header />
+      <Container maxwidth="lg">
+        <Header />
+        <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/auth" exact element={<Auth />} />
-        </Container>
-      </Routes>
+        </Routes>
+      </Container>
     </Browser>
   )
 }
